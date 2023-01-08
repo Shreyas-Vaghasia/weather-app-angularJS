@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body ng-app="weatherApp">
+    <div ng-controller="weatherController" class="container mt-5">
+        <h1>Weather App</h1>
+        <form class="row">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">City</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter city here "
+                    ng-model="city">
+            </div>
+        </form>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-3" ng-click="getWeather(city)">
+
+                    <span ng-show="loading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+
+                    Submit</button>
+            </div>
+        </div>
+        <div class="spinner-border" role="status" ng-show="loading">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="row justify-content-center" ng-hide="loading">
+            <div class="col-md-5 card m-3 p-4">
+                <h3>Location</h3>
+                <hr>
+                <h5>City: {{weather.location.city}}</h5>
+                <h5>region: {{weather.location.region}}</h5>
+                <h5>country: {{weather.location.country}}</h5>
+                <h5>lat: {{weather.location.lat}}</h5>
+                <h5>long: {{weather.location.long}}</h5>
+                <h5>timezone_id: {{weather.location.timezone_id}}</h5>
+
+                <div class="col-md-6 card m-1 p-2">
+                    <h5>Astronomy</h5>
+                    <h5>sunrise: {{weather.current_observation.astronomy.sunrise}}</h5>
+                    <h5>sunset: {{weather.current_observation.astronomy.sunset}}</h5>
+                </div>
+
+            </div>
+            <div class="col-md-5 card m-3 p-4">
+                <h5>Weather Forecast</h5>
+                <div ng-repeat="forecast in weather.forecasts">
+                    <div class="m-4">
+                        <h5>{{forecast.day}}: {{forecast.text}}</h5>
+                        <h5>
+                            High: {{forecast.high}} Low: {{forecast.low}}
+                        </h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center" ng-hide="loading">
+
+            
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
